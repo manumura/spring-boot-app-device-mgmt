@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>video.js video sample</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    
+<!-- 	<link rel="stylesheet" type="text/css" href="css/mkhplayer.default.css"/> -->
+<!-- 	<link rel="stylesheet" type="text/css" href="css/main.css"/> -->
+	
+	<!-- https://videojs.com/ -->
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/videojs/video.min.js"></script>
+	<script src="js/videojs/videojs-flash.min.js"></script>
+	<script src="js/videojs/dash.all.min.js"></script>
+	<script src="js/videojs/videojs-dash.min.js"></script>
+	<script src="js/videojs/videojs-contrib-hlsjs.min.js"></script>
+	<link href="css/video-js.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+  	<!-- If you'd like to support IE8 -->
+	<!--   <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+</head>
+
+<body>
+	<div class="header">
+	  <h1>video.js video sample</h1>
+	</div>
+    <section class="main-content">
+    	<input id="playerSource" type="text" placeholder="source" value="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" />
+		<button id="playButton">Play</button>
+		<video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+			width="640" data-setup='{ "techorder" : ["flash", "html5"] }'>
+<!-- 			poster="MY_VIDEO_POSTER.jpg" -->
+<!-- 			<source type="video/webm" src="http://localhost:8090/stream"> -->
+<!-- 			<source src="MY_VIDEO.mp4" type='video/mp4'> -->
+<!-- 			<source src="MY_VIDEO.webm" type='video/webm'> -->
+<!-- 			<source type="rtmp/mp4" src="rtmp://184.72.239.149/vod/mp4:bigbuckbunny_1500.mp4" /> -->
+<!-- 			<source type='rtmp/flv' src="rtmp://ossrs.net/yom/qtcre"> -->
+<!-- 			<source type='rtmp/flv' src="rtmp://192.168.2.113/LiveApp/354802989174760345964971"> -->		
+			<source type='application/x-mpegurl' src="http://184.72.239.149/vod/smil:BigBuckBunny.smil/playlist.m3u8">
+<!-- 			<source type='application/x-mpegurl' src="http://192.168.2.109/LiveApp/streams/679029362635298781366166.m3u8"> -->
+<!-- 			<source type='application/dash+xml' src="http://yt-dash-mse-test.commondatastorage.googleapis.com/media/car-20120827-manifest.mpd"> -->
+			<p class="vjs-no-js">
+				To view this video please enable JavaScript, and consider upgrading
+				to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supportsHTML5 video</a>
+			</p>
+		</video>
+		
+		<script type="text/javascript">
+ 			$(document).ready(function(){
+			
+				const player = videojs('my-video');
+				//const myPlayer = $('#my-video');
+				console.log(player);
+				
+				const playerSource = $('#playerSource');
+				// https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8
+				// https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8
+				// http://www.streambox.fr/playlists/test_001/stream.m3u8
+			
+ 				$('#playButton').on('click', function(event) {
+					console.log('click: ' + playerSource.val());
+					
+					player.on('ended', function() {
+						console.log('video is done!');
+					});
+					
+					player.on('pause', function() {
+						console.log('on pause!');
+					});
+					
+					player.on('play', function() {
+						console.log('on play!');
+					});
+					
+					if (playerSource.val()) {
+						player.reset()
+						player.src({ type: 'application/x-mpegurl', src: playerSource.val() });
+						player.play();
+					}					
+					
+					/*if (!player.paused() && !player.ended()) {
+						console.log('pause');
+						player.pause();
+					} else {
+						console.log('play');
+						player.play();
+					};*/
+				});
+			});
+		</script>
+
+<!-- 		<video id='video' preload="metadata" width="100%"> -->
+<!-- 			<source src="http://localhost:8090/stream"> -->
+<!-- 			<source src="media/small.mp4"> -->
+<!-- 			<source src="http://static.videogular.com/assets/videos/videogular.mp4"> -->
+<!-- 		</video> -->
+<!-- 		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> -->
+<!-- 		<script type="text/javascript" src="js/jquery.mkhplayer.js"></script> -->
+<!-- 		<script type="text/javascript"> -->
+<!-- 			$(document).ready(function(){ -->
+<!-- 				console.log('Video playing'); -->
+<!-- 				$('video').mkhPlayer(); -->
+<!-- 			}); -->
+<!-- 		</script> -->
+
+<!-- 		<footer class="site-footer"> -->
+<!--           	<span class="site-footer-owner"> -->
+<!--           		The <a href="https://tutorial-academy.com/rest-jersey2-resume-video-streaming">tutorial</a> can be found here. -->
+<!--           	</span> -->
+<!--         	<span class="site-footer-credits"> -->
+<!--         		This code is available at <a href="https://github.com/maltesander/rest-jersey2-resume-video-streaming">GitHub</a>. -->
+<!--         	</span> -->
+<!--       	</footer> -->
+	</section>
+</body>
+</html>

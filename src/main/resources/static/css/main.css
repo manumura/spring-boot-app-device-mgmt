@@ -1,0 +1,9 @@
+.main-content {
+	width: 640px;
+	height: 480px;
+}
+
+.vjs-paused .vjs-big-play-button,
+.vjs-paused.vjs-has-started .vjs-big-play-button {
+   display: block;
+}

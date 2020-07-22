@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Media element video sample</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    
+	<!-- http://www.mediaelementjs.com/ -->
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/mediaelement/mediaelement-and-player.min.js"></script>
+	<link rel="stylesheet" href="js/mediaelement/mediaelementplayer.min.css" />
+</head>
+
+<body>
+	<div class="header">
+	  <h1>Media element video sample</h1>
+	</div>
+	<section class="main-content">
+		<video width="640" id="mediaplayer" controls="controls" muted="muted" title="MediaElement"
+			data-cast-title="Big Buck Bunny"
+            data-cast-description="Big Buck Bunny is now even more a world standard for video standards"
+            poster="http://mediaelementjs.com/images/big_buck_bunny.jpg">
+<!-- 			<source type="video/rtmp" data-plugin-type="flash" src="rtmp://ossrs.net/yom/qtcre" /> -->
+			<source type="video/rtmp" src="rtmp://184.72.239.149/vod/mp4:bigbuckbunny_1500.mp4" />
+<!-- 			<source type="video/mp4" src="media/small.mp4" /> -->
+		</video>
+		
+<!-- 		<audio id="player2" preload="none" controls width="750" -->
+<!--                data-cast-title="Jazz Example" -->
+<!--                data-cast-description="This is a description for audio only" -->
+<!--                data-cast-poster="http://mediaelementjs.com/images/big_buck_bunny.jpg"> -->
+<!--             <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3" title="Jazz Example" data-playlist-thumbnail="http://mediaelementjs.com/images/big_buck_bunny.jpg" data-playlist-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vestibulum justo arcu. Vestibulum commodo lacus bibendum sollicitudin commodo."> -->
+<!--             <source src="https://api.soundcloud.com/tracks/323195515/stream?client_id=95f22ed54a5c297b1c41f72d713623ef" type="audio/mp3" title="Soundcloud rocks!" data-playlist-description="Curabitur et malesuada arcu. Praesent hendrerit, quam vel pellentesque aliquam, metus felis mattis velit, quis varius metus diam vitae diam. Integer ante massa, tempor in accumsan eu, sodales in lectus."> -->
+<!--             <source src="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st/mp3:fake_empire-cbr" type="rtmp/video" title="Playing RTMP audio..."> -->
+<!--         </audio> -->
+		
+		<script>
+		$('#mediaplayer').mediaelementplayer({
+			pluginPath: 'js/mediaelement/',
+			// When using jQuery's 'mediaelementplayer', an 'instance' argument
+			// is available in the 'success' callback
+			success: function(mediaElement, originalNode, instance) {
+				// do things
+				console.log('player started');
+				instance.load();
+			},
+		});
+</script>
+	</section>
+</body>
+</html>
