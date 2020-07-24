@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,7 +77,7 @@ public class UserRestController {
 
 	// getUser API version 2 (URI versioning)
 	@GetMapping(value = "/v2/{id}") // // , headers = "X-API-VERSION=2" (header versioning)
-	public Resource<User> getUserV2(@PathVariable("id") long id) {
+	public EntityModel<User> getUserV2(@PathVariable("id") long id) {
 		logger.info("Fetching User with id {}", id);
 		User user = userService.findById(id);
 		if (user == null) {
@@ -89,12 +89,12 @@ public class UserRestController {
 
 		// HATEOAS
 		// "all-users" : SERVER_PATH + "/user" => listAllUsers method
-		Resource<User> resource = new Resource<>(user);
-		ControllerLinkBuilder linkTo = ControllerLinkBuilder
-				.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).listAllUsers());
-		resource.add(linkTo.withRel("list-users"));
-		logger.info("resource: {}", resource);
-		return resource;
+		EntityModel<User> entityModel = EntityModel.of(user);
+		WebMvcLinkBuilder linkTo = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).listAllUsers());
+		entityModel.add(linkTo.withRel("list-users"));
+		logger.info("resource: {}", entityModel);
+		return entityModel;
 	}
 
 	@PostMapping()

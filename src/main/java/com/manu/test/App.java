@@ -11,14 +11,11 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
-import com.manu.test.configuration.PersistenceConfiguration;
-
 /**
  * @author emmanuel.mura
  *
  */
-@Import(PersistenceConfiguration.class)
-@SpringBootApplication(scanBasePackages = {"com.manu.test"})
+@SpringBootApplication()
 public class App {
 
     public static void main(String[] args) {
@@ -27,20 +24,5 @@ public class App {
 //        for (String name : ctx.getBeanDefinitionNames()) {
 //        	System.out.println(name);
 //        }
-    }
-    	
-    @Bean
-	public LocaleResolver localeResolver() {
-		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
-		localeResolver.setDefaultLocale(Locale.US);
-		return localeResolver;
-	}
-    
-    // TODO : put in config
-    @Bean
-    public ResourceBundleMessageSource messageSource() {
-    	ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-    	messageSource.setBasename("messages");
-    	return messageSource;
     }
 }
